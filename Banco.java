@@ -4,7 +4,7 @@ public class Banco {
 	private Conta[] contas = new Conta[0];
 	
 	public Conta criarConta(String nome) {
-		int numero = 1000 + contas.length;
+		int numero = 1001 + contas.length;
 		Conta nova = new Conta(nome, numero);
 		
 		Conta[] maior = new Conta[contas.length+1];
