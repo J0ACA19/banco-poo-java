@@ -1,10 +1,16 @@
 package ContaBancaria;
 
 public class Banco {
+	private int quantidade;
 	private Conta[] contas = new Conta[0];
 	
+	public Banco() {
+		quantidade = 0;
+	}
+	
 	public Conta criarConta(String nome) {
-		int numero = 1001 + contas.length;
+		int numero = 1001 + quantidade;
+		quantidade++;
 		Conta nova = new Conta(nome, numero);
 		
 		Conta[] maior = new Conta[contas.length+1];
@@ -15,6 +21,25 @@ public class Banco {
  		
  		contas = maior;
  		return nova;
+	}
+	
+	public boolean cancelarConta(int numero) {
+		for (int i = 0; i < contas.length; i++) {
+			if (contas[i].getNumeroConta() == numero) {
+				contas[i] = null;
+				for (int j=i; j < contas.length-1; j++) {
+					contas[j] = contas[j+1];
+					contas[j+1] = null;
+				}
+				Conta[] auxiliar = new Conta[contas.length - 1];
+				for (int j = 0; j < auxiliar.length; j++) {
+					auxiliar[j] = contas[j];
+				}
+				contas = auxiliar;
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Conta buscarConta(int numero) {
@@ -40,7 +65,6 @@ public class Banco {
 		
 		if (contaOrigem.saqueConta(valor)) {
 			contaDestino.depositoConta(valor);
-			return true;
 		}
 		
 		return false;	
@@ -52,7 +76,7 @@ public class Banco {
 			return;
 		}
 		for(int i = 0; i < contas.length; i++) {
-			System.out.println(contas[i].getNumeroConta() + " - " + contas[i].getNome() + " - Saldo: " + contas[i].verSaldo());
+			System.out.println("Número da conta: " + contas[i].getNumeroConta() + " - " + contas[i].getNome() + " - Saldo: " + contas[i].verSaldo());
 		}
 			
 	}
