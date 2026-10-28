@@ -3,11 +3,12 @@ package ContaBancaria;
 public class Conta {
 	private int numeroConta;
 	private String nome;
-	private double saldo = 0;
+	private double saldo;
 	
 	Conta(String nome, int numeroConta){
 		this.nome = nome;
 		this.numeroConta = numeroConta;
+		saldo = 0;
 	}
 	
 	public String getNome() {
